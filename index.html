@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Переключение темы</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-theme {
+    background-color: #333;
+    color: #fff;
+}
+h1 {
+    color: #f22626; /* Цвет заголовков по умолчанию в светлой теме */
+}
+
+.dark-theme h1 {
+    color: #fff; /* Цвет заголовков в темной теме */
+}
+
+</style>
+<body>
+    <h1>Переключение темы</h1>
+    <label for="theme-toggle">Тема:</label>
+    <input type="checkbox" id="theme-toggle">
+    
+    <script>
+     // Ожидаем загрузку всего документа, чтобы убедиться, что DOM полностью загружен
+    document.addEventListener("DOMContentLoaded", function() {
+    // Получаем ссылку на переключатель темы по его id
+    const themeToggle = document.getElementById("theme-toggle");
+
+    // Проверяем, какая тема была выбрана при предыдущем посещении страницы
+    if (localStorage.getItem("theme") === "dark") {
+        // Если выбрана темная тема, добавляем соответствующий класс на body
+        document.body.classList.add("dark-theme");
+        // Устанавливаем флаг переключателя в true (чтобы он был отмечен)
+        themeToggle.checked = true;
+    }
+
+    // Добавляем обработчик события для переключения темы
+    themeToggle.addEventListener("change", function() {
+        // Проверяем, выбрана ли темная тема
+        if (themeToggle.checked) {
+            // Если выбрана, добавляем класс dark-theme на body
+            document.body.classList.add("dark-theme");
+            // Сохраняем выбор темы в локальное хранилище браузера
+            localStorage.setItem("theme", "dark");
+        } else {
+            // Если темная тема не выбрана, удаляем класс dark-theme с body
+            document.body.classList.remove("dark-theme");
+            // Сохраняем выбор темы в локальное хранилище браузера
+            localStorage.setItem("theme", "light");
+        }
+    });
+});
+
+
+    </script>
+</body>
+</html>
